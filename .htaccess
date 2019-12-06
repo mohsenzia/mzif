@@ -1,0 +1,44 @@
+RewriteEngine On
+# Block access to PHP easter eggs
+RewriteCond %{QUERY_STRING} \=PHP[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12} [NC]
+RewriteRule .* - [F]
+# Block out any script trying to base64_encode data within the URL.
+RewriteCond %{QUERY_STRING} base64_encode[^(]*\([^)]*\) [OR]
+# Block out any script that includes a <script> tag in URL.
+RewriteCond %{QUERY_STRING} (<|%3C)([^s]*s)+cript.*(>|%3E) [NC,OR]
+# Block out any script trying to set a PHP GLOBALS variable via URL.
+RewriteCond %{QUERY_STRING} GLOBALS(=|\[|\%[0-9A-Z]{0,2}) [OR]
+# Block out any script trying to modify a _REQUEST variable via URL.
+RewriteCond %{QUERY_STRING} _REQUEST(=|\[|\%[0-9A-Z]{0,2})
+# Return 403 Forbidden header and show the content of the root homepage
+RewriteRule .* index.php [F]
+#
+
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+	RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+	RewriteCond %{REQUEST_URI} !^/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
+		
+	RewriteCond %{HTTP_HOST} ^maghalekade\.ir$ [OR]
+	RewriteCond %{HTTP_HOST} ^www\.maghalekade\.ir$
+	RewriteRule ^([^.]*)$ "http\:\/\/maghalekade\.com/$1" [L,R=301]
+	RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+	RewriteCond %{REQUEST_URI} !^/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
+	RewriteCond %{HTTP_HOST} ^wikis\.maghalekade\.com$ [OR]
+	RewriteCond %{HTTP_HOST} ^www\.wikis\.maghalekade\.com$
+	RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+	RewriteCond %{REQUEST_URI} !^/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
+	RewriteRule ^/?$ "http\:\/\/www\.maghalekade\.com\/wikis" [R=301,L]
+	RewriteCond %{REQUEST_URI} !robots.txt
+	RewriteCond %{REQUEST_URI} !bot
+	
+	RewriteCond %{REQUEST_URI} !snake
+	
+    RewriteRule    ([^.]*) public/$1    [L]
+ </IfModule>
+
+Header set Connection keep-alive 
+
+
+

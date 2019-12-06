@@ -1,0 +1,95 @@
+@charset "utf-8";
+
+@font-face {
+    font-family: 'iransans';
+    src: url(../font/IRANSans.ttf);
+}
+
+* {
+    font-family: 'iransans';
+    padding: 0;
+    margin: 0;
+}
+
+.row {
+    margin: 0;
+}
+
+.ltr {
+    direction: ltr;
+}
+
+.rtl {
+    direction: rtl;
+}
+
+.pad0 {
+    padding: 0 !important;
+}
+
+.mar0 {
+    margin: 0 !important;
+}
+
+.bg-purple {
+    background: #ba2191;
+}
+
+.bg-orange {
+    background: #d67900;
+}
+
+.bg-pink {
+    background: #d670b2;
+}
+
+.bg-lightgreen {
+    background: #76d671;
+}
+
+.bg-lightblue {
+    background: #83add6;
+}
+
+.bg-brawn {
+    background: #ba8628;
+}
+
+.bg-gray {
+    background: #f0f0f0;
+}
+
+body {
+    background-color: #f0f0f0;
+}
+
+.custom-control {
+    margin-bottom: 10px;
+}
+
+ul {
+    margin-right: 2rem;
+}
+
+.fas {
+    margin-left: 15px;
+}
+
+.material-input {
+    border: none;
+    border-bottom: 1px solid #e9e9e9;
+    border-radius: 0;
+    box-shadow: none !important;
+}
+
+#main-alert {
+    position: fixed;
+    width: 500px;
+    margin: auto;
+    z-index: 9999;
+    left: 0;
+    right: 0;
+    top: 20%;
+    display: none;
+    border-radius: 10px;
+}
